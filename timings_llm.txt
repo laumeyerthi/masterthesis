@@ -1,0 +1,12 @@
+cloud
+STT: 0.327s | Matcher: 0.000s | LLM: 6.551s
+STT: 0.225s | Matcher: 0.000s | LLM: 3.281s
+STT: 0.267s | Matcher: 0.000s | LLM: 1.026s
+STT: 0.267s | Matcher: 0.000s | LLM: 30.026s
+STT: 0.267s | Matcher: 0.000s | LLM: 76.026s
+
+local
+STT: 0.288s | Matcher: 0.000s | LLM: 7.061s
+STT: 0.199s | Matcher: 0.000s | LLM: 1.638s
+STT: 0.307s | Matcher: 0.001s | LLM: 0.410s
+STT: 0.264s | Matcher: 0.000s | LLM: 1.954s

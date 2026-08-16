@@ -1,0 +1,1 @@
+ppo_masked_sb3: {'learning_rate': 7.494003701284142e-05, 'n_steps': 1024, 'batch_size': 64, 'n_epochs': 20, 'gamma': 0.99, 'gae_lambda': 0.98, 'clip_range': 0.4, 'ent_coef': 1.3230232060196722e-07} 

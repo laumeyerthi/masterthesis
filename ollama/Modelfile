@@ -1,0 +1,7 @@
+# Manifest / Modelfile for creating gemma-4-e2b in Ollama from local GGUF weights
+# Place your downloaded 4.41 GB GGUF model file in this directory named: gemma-4-e2b.gguf
+
+FROM ./gemma-4-e2b.gguf
+
+# You can add custom system prompts or parameters here if needed:
+# PARAMETER temperature 0.7
