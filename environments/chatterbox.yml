@@ -1,4 +1,4 @@
-﻿name: chatterbox
+name: chatterbox
 channels:
   - conda-forge
   - pytorch
@@ -10,7 +10,7 @@ dependencies:
   - numpy<2.0.0
   - torchaudio
   - python-sounddevice
-  - soundfile
+  - pysoundfile
   - fastapi
   - uvicorn
   - pip:

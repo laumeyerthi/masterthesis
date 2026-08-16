@@ -1,6 +1,6 @@
 @echo off
 echo ========================================================
-echo        Riddle-Generator Advisor Setup (Windows)
+echo        Masterthesis Setup (Windows)
 echo ========================================================
 echo.
 echo [1/4] Creating/Updating conda environment: masterthesis...
@@ -22,14 +22,14 @@ if %errorlevel% neq 0 (
 
 echo.
 echo [3/4] Installing root project and sublibraries into 'masterthesis'...
-call conda run -n masterthesis pip install -e .
+call conda run --no-capture-output -n masterthesis pip install --no-build-isolation -e .
 if %errorlevel% neq 0 (
     echo [ERROR] Failed to install root project into 'masterthesis'.
     pause
     exit /b %errorlevel%
 )
 
-call conda run -n masterthesis pip install -e .\libraries\recurrent_maskable
+call conda run --no-capture-output -n masterthesis pip install --no-build-isolation -e .\libraries\recurrent_maskable
 if %errorlevel% neq 0 (
     echo [ERROR] Failed to install editable local package 'recurrent_maskable' into 'masterthesis'.
     pause
