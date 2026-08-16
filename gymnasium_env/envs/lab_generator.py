@@ -20,7 +20,6 @@ class LabGenerator:
         self.generate_lab()
 
     def get_grid_adjacency(self):
-        # Returns a mask of all VALID connections in a grid
         adj = np.zeros((self.number_of_rooms, self.number_of_rooms), dtype=int)
         for r in range(self.grid_size):
             for c in range(self.grid_size):
@@ -33,29 +32,20 @@ class LabGenerator:
                 if c + 1 < self.grid_size:
                     next_node = r * self.grid_size + (c + 1)
                     adj[curr, next_node] = adj[next_node, curr] = 1
-        # Self loop
         np.fill_diagonal(adj, 1)
         return adj
 
     def generate_rooms(self):
-        # Generate random matrix
         rooms = self.rng.integers(0, 2, size=(self.number_of_rooms, self.number_of_rooms))
         rooms = np.triu(rooms, 1) # Upper triangle
         rooms = rooms + rooms.T # Symmetric
         np.fill_diagonal(rooms, 1) # Self connected
         
-        # Apply Grid Mask
         grid_adj = self.get_grid_adjacency()
         rooms = rooms * grid_adj
         return rooms
 
     def sanity_check(self):
-        """
-        Check if there is a path from start room to goal room in the labyrinth.
-        Matrix: Transition matrix (numpy array)
-        start: Index of the starting room (0-based)
-        goal: Index of the goal room (0-based)
-        """
         # Create a queue for BFS and a set to track visited rooms
         queue = deque([self.start_room])
         visited = set()
@@ -112,11 +102,6 @@ class LabGenerator:
         return single_button_matrix
 
     def is_fully_solvable(self):
-        """
-        Performs a full state-space BFS to check if the goal is reachable
-        considering walls, doors, buttons, AND backtracking.
-        State: (current_room_idx, button_toggle_mask, last_room_idx)
-        """
         # Initial state: Start room, no buttons toggled (mask=0), last_room = -1 (none)
         start_state = (self.start_room, 0, -1)
         
