@@ -37,22 +37,22 @@ if %errorlevel% neq 0 (
 )
 
 echo.
-echo [4/4] Setting up local custom Gemma model (gemma-4-e2b) in Ollama...
+echo [4/4] Setting up local custom Gemma model [gemma-4-e2b] in Ollama...
 if not exist "ollama" mkdir "ollama"
 
 if not exist "ollama\gemma-4-e2b.gguf" (
-    echo [INFO] Custom model file (gemma-4-e2b.gguf) not found in 'ollama\' directory.
+    echo [INFO] Custom model file [gemma-4-e2b.gguf] not found in 'ollama\' directory.
     echo Downloading 4.41 GB Q4_K_M model directly from Hugging Face...
-    echo (This may take several minutes depending on your connection speed...)
+    echo [This may take several minutes depending on your connection speed...]
     call curl.exe -L --output "ollama\gemma-4-e2b.gguf" "https://huggingface.co/lmstudio-community/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q4_K_M.gguf"
-    if %errorlevel% neq 0 (
+    if errorlevel 1 (
         echo [ERROR] Failed to download model automatically.
         if exist "ollama\gemma-4-e2b.gguf" del "ollama\gemma-4-e2b.gguf"
         echo Please download manually from:
         echo https://huggingface.co/lmstudio-community/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q4_K_M.gguf
         echo and place it into the 'ollama\' directory as 'gemma-4-e2b.gguf'.
         pause
-        exit /b %errorlevel%
+        exit /b 1
     )
 )
 
