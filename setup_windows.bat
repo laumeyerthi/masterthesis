@@ -3,6 +3,7 @@ echo ========================================================
 echo        Masterthesis Setup (Windows)
 echo ========================================================
 echo.
+
 echo [1/4] Creating/Updating conda environment: masterthesis...
 call conda env create -f environments\masterthesis.yml 2>nul || call conda env update -f environments\masterthesis.yml --prune
 if %errorlevel% neq 0 (
@@ -14,6 +15,8 @@ if %errorlevel% neq 0 (
 echo.
 echo [2/4] Creating/Updating conda environment: chatterbox...
 call conda env create -f environments\chatterbox.yml 2>nul || call conda env update -f environments\chatterbox.yml --prune
+call conda activate chatterbox
+call pip install torch==2.6.0+cu124 torchaudio==2.6.0+cu124 chatterbox-tts==0.1.7 resemble-perth==1.0.1 s3tokenizer==0.3.0 conformer==0.3.2 pykakasi==2.3.0 pyloudnorm==0.2.0 --index-url https://download.pytorch.org/whl/cu124 --extra-index-url https://pypi.org/simple
 if %errorlevel% neq 0 (
     echo [ERROR] Failed to set up 'chatterbox' conda environment.
     pause
@@ -21,20 +24,26 @@ if %errorlevel% neq 0 (
 )
 
 echo.
-echo [3/4] Installing root project and sublibraries into 'masterthesis'...
-call conda run --no-capture-output -n masterthesis pip install --no-build-isolation -e .
+echo [3/4] Installing editable project sublibraries...
+call conda activate masterthesis
+call pip install --no-build-isolation --no-deps -e .
 if %errorlevel% neq 0 (
     echo [ERROR] Failed to install root project into 'masterthesis'.
     pause
     exit /b %errorlevel%
 )
 
-call conda run --no-capture-output -n masterthesis pip install --no-build-isolation -e .\libraries\recurrent_maskable
+call conda run --no-capture-output -n masterthesis pip install --no-build-isolation --no-deps -e .\libraries\recurrent_maskable
 if %errorlevel% neq 0 (
     echo [ERROR] Failed to install editable local package 'recurrent_maskable' into 'masterthesis'.
     pause
     exit /b %errorlevel%
 )
+
+echo.
+echo --- Verifying CUDA Environments ---
+call conda run --no-capture-output -n masterthesis python -c "import torch; print('[masterthesis] CUDA Available:', torch.cuda.is_available(), '| Device:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU only')"
+call conda run --no-capture-output -n chatterbox python -c "import torch; print('[chatterbox]   CUDA Available:', torch.cuda.is_available(), '| Device:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU only')"
 
 echo.
 echo [4/4] Setting up local custom Gemma model [gemma-4-e2b] in Ollama...

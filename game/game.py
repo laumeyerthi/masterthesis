@@ -5,13 +5,13 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from gymnasium.utils.play import play
 import pygame
-from ai_chat_bot import AIChatBot
+from ai_chat_bot_local import AIChatBot
 from transcript.LocalSTT import LocalSTT
 from matcher.localCommandMatcher import LocalCommandMatcher
 from recording.VoiceRecorder import VoiceRecorder
 # from recording.VoicePlayer import VoicePlayer
 import numpy as np
-from fastapi.request import play_scotty_voice
+from voice_server.request import play_scotty_voice
 
 # Add parent directory for env import
 from gymnasium_env.envs.lab_env import LabEnv

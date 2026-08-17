@@ -1,3 +1,7 @@
+from networkx.generators import spectral_graph_forge
+from networkx.generators import spectral_graph_forge
+from networkx.generators import spectral_graph_forge
+from networkx.generators import spectral_graph_forge
 import sys
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -14,6 +18,7 @@ import perth
 from fastapi import FastAPI, BackgroundTasks
 from fastapi.responses import StreamingResponse, JSONResponse
 import uvicorn
+from pathlib import Path
 
 
 
@@ -39,8 +44,8 @@ class VoiceGenerator:
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         print(f"--- [INFO] Active Device: {self.device} ---")
         self.tts = ChatterboxTurboTTS.from_pretrained(self.device) 
-        root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-        self.ref_audio = os.path.join(root_dir, "voicelines", "scooty_scott_uncleaned.wav")
+        root_dir = Path(__file__).parent.parent
+        self.ref_audio = root_dir / "voicelines" / "scotty_scott_uncleaned.wav"
         
         print("--- [INFO] Preparing Voice Conditionals ---")
         self.tts.prepare_conditionals(self.ref_audio)

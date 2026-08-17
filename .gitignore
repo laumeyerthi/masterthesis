@@ -165,7 +165,6 @@ tests/
 q_learning_agent.pt
 dqn_lab_env.zip 
 *.pyc
-*.wav
 venv*/
 
 # Ignore large model weight files

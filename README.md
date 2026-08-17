@@ -47,7 +47,7 @@ To run the interactive game with TTS voice features and the local AI chatbot:
 1. **Terminal 1 (Voice Generation Server):**
    ```bat
    conda activate chatterbox
-   python fastapi/VoiceGeneratorServer.py
+   python voice_server/VoiceGeneratorServer.py
    ```
 2. **Terminal 2 (Game / Chat Simulation):**
    ```bat
@@ -56,10 +56,25 @@ To run the interactive game with TTS voice features and the local AI chatbot:
    ```
 *(Note: Ensure Ollama is running in the background for LLM chatbot interactions).*
 
-cloud need api key
+### 4. Configuration
+If you plan to use the cloud-based AI chatbot fallback (instead of the local Ollama model), you will need to provide a Gemini API key:
+1. Create a `.env` file in the root directory.
+2. Add your API key:
+   ```env
+   GEMINI_API_KEY="your_api_key_here"
+   ```
 
-controls for game
+### 5. Game Controls
+When running the interactive game, you can use the following controls:
+- **Arrow Keys (Up, Down, Left, Right):** Move your character.
+- **Left Alt:** Special action / Interact.
+- **Number Keys (1, 2, 3, 4):** Select options/actions.
+- **V:** Press and hold (or toggle) to record your voice for the voice server.
+- **Enter:** Open text chat or send a typed message.
 
+### 6. Troubleshooting
+**Running Setup Scripts:** 
+It is highly recommended to run `setup_windows.bat` directly from a command line (Command Prompt or PowerShell) rather than double-clicking it in File Explorer. This ensures that if an error occurs, the terminal window remains open and you can read the exact error output before it closes.
 
 
 
