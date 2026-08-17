@@ -25,6 +25,10 @@ pip install -e .
 pip install -e .\libraries\recurrent_maskable
 conda deactivate
 
+conda activate chatterbox
+pip install torch==2.6.0+cu124 torchaudio==2.6.0+cu124 chatterbox-tts==0.1.7 resemble-perth==1.0.1 s3tokenizer==0.3.0 conformer==0.3.2 pykakasi==2.3.0 pyloudnorm==0.2.0 --index-url https://download.pytorch.org/whl/cu124 --extra-index-url https://pypi.org/simple
+conda deactivate
+
 # After placing gemma-4-e2b.gguf inside the ollama/ directory:
 ollama create gemma-4-e2b -f .\ollama\Modelfile
 ```
